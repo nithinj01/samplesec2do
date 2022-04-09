@@ -1,5 +1,6 @@
 package com.sec2do.coding.challenges.mapping.controllers
-
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import com.sec2do.coding.challenges.mapping.models.dto.ArticleDto
 import com.sec2do.coding.challenges.mapping.services.ArticleService
 import org.springframework.web.bind.annotation.*
