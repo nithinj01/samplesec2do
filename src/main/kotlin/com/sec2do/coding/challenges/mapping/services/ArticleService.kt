@@ -11,14 +11,24 @@ class ArticleService(
 ) {
     fun list(): List<ArticleDto> {
         val articles = ArticleRepository.all()
-        //TODO
+        if (list.isNullOrEmpty()) {
+        println("List is null or empty")
         return emptyList()
+        }
+        else {
+        return articles
+        }
+        
     }
 
     fun articleForId(id: Long): ArticleDto {
         val article = ArticleRepository.findBy(id)
-        //TODO
-        return ArticleDto(0, "", "", "", emptyList())
+        val id= article.id,
+        val title= article.title,
+        val description= article.description,
+        val author= article.author,
+        val blocks= article.blocks
+        return ArticleDto(id,title, description, author, blocks)
     }
 
     fun create(articleDto: ArticleDto): ArticleDto {
