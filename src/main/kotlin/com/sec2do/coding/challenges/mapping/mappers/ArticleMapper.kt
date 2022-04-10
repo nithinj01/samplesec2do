@@ -8,8 +8,13 @@ import java.util.*
 @Component
 class ArticleMapper {
     fun map(article: Article?): ArticleDto {
-        //TODO
-        return ArticleDto(0, "", "", "", emptyList())
+               
+        val id= article.id,
+        val title= article.title,
+        val description= article.description,
+        val author= article.author,
+        val blocks= article.blocks
+        return ArticleDto(id, title, description, author, blocks)
     }
 
     // Not part of the challenge / Nicht Teil dieser Challenge.
