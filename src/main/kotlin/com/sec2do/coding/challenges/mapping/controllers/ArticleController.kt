@@ -13,7 +13,7 @@ class ArticleController(
     private val articleService: ArticleService
 ) {
     @GetMapping
-    fun list(): List<ArticleDto> {
+    fun list(): String {
         val dtoList: List<ArticleDto> =articleService.list()
         val gson = Gson()
         val jsonlist=gson.toJson(dtoList)
@@ -21,13 +21,17 @@ class ArticleController(
     }
 
     @GetMapping("/{id}")
-    fun details(@PathVariable(value = "id") articleId: Long): ResponseEntity<ArticleDto> {
-        return articleService.articleForId(articleId).map { article ->
-            ResponseEntity.ok(article)
+    fun details(@PathVariable id: Long): ArticleDto{ 
+        val gson = Gson()
+        val dto: ArticleDto= articleService.articleForId(id)
+        if (dto != null ) {
+            val jsondto: String = gson.toJson(dto)           
+            return articleService.articleForId(articleId).map { jsondto ->
+            ResponseEntity.ok(jsondto)
         }.orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).body(errors))
+        }
+        
     }
-
-
     @PostMapping
     fun create(@RequestBody articleDto: ArticleDto): ArticleDto = articleService.create(articleDto)
 }
